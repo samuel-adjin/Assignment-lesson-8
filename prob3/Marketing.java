@@ -1,8 +1,4 @@
 package prob3;
-
-
-
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class Marketing implements Comparable <Marketing> {
@@ -21,11 +17,18 @@ public class Marketing implements Comparable <Marketing> {
 		if(obj == null) return false;
 		if(getClass() != obj.getClass()) return false;
 		Marketing m = (Marketing) obj;
-		return employeename.equals(((Marketing) obj).getEmployeename()) &&
-				productname.equals(((Marketing) obj).getProductname()) &&
-				salesamount == ((Marketing) obj).salesamount;
+		return salesamount == ((Marketing) obj).salesamount &&
+				employeename.equals(((Marketing) obj).getEmployeename()) &&
+				productname.equals(((Marketing) obj).getProductname());
 	}
 
+	@Override public int compareTo(Marketing o) {
+		int compareSales = Double.compare(this.salesamount, o.salesamount);
+		if (compareSales != 0) return compareSales;
+		int compareName = this.employeename.compareTo(o.employeename);
+		if (compareName != 0) return compareName;
+		return this.productname.compareTo(o.productname);
+	}
 
 	public String getEmployeename() {
 		return employeename;
@@ -56,14 +59,6 @@ public class Marketing implements Comparable <Marketing> {
 		return employeename + " " + productname + " " + salesamount;
 	}
 
-	@Override
-	public int compareTo(Marketing o) {
-		/*int checkName = this.employeename.compareTo(o.employeename);
-		if(checkName != 0) return checkName;
-		int checkProduct = this.productname.compareTo(o.productname);
-		if (checkProduct != 0) return checkProduct; */
-		return Double.compare(this.salesamount, o.salesamount);
-	}
 
 	public static List<Marketing> listMoreThan1000(List<Marketing>list){
 		ArrayList<Marketing> market = new ArrayList<>();
@@ -77,7 +72,7 @@ public class Marketing implements Comparable <Marketing> {
 	public static void main(String[] args) {
 
 	// Create instance for marketing object
-	Marketing m1 = new Marketing("Bruce Tom","Coke", 1360);
+	Marketing m1 = new Marketing("Bruce Tom","Coke", 3360);
 	Marketing m2= new Marketing("Paul Corozza","Pepsi", 2000);
 	Marketing m3 = new Marketing("Joe Lermon","Fanta", 1380);
 	Marketing m4 = new Marketing("Anne","Dow", 250);
@@ -95,29 +90,31 @@ public class Marketing implements Comparable <Marketing> {
 	System.out.println("\nAdding data .............");
 	System.out.println(marketings);
 	System.out.println("The size of the list is = " + marketings.size());
-	marketings.remove(m3);
-	System.out.println();
 
 	//Removing the object m3
 	System.out.println("After removing Joe Lermon............");
+	marketings.remove(m3);
+	System.out.println();
 	System.out.println(marketings);
 	System.out.println("The size of the list is = " + marketings.size());
 	System.out.println();
+
 	//Get marketing object by its position
 	System.out.println("Getting the marketing data by using index..............");
 	System.out.println(marketings.get((2)));
-	System.out.println();
+
 	//Set the marketing object by its position
 	Marketing m6 = new Marketing("Jackie","Chan", 26000);
+	System.out.println();
 	marketings.set(3,m6);
 	System.out.println("Updating after change Thomas Jefferson to Jackie Chan..................");
 	System.out.println(marketings);
-
+	System.out.println();
 	System.out.println("Sorting by sale amount ...............");
 	//marketings.sort((Marketing m11, Marketing m22) -> Double.compare(m22.getSalesamount(), m11.getSalesamount()));
 	Collections.sort(marketings);
 	System.out.println(marketings);
-
+	System.out.println();
 	System.out.println("Sorting the the employees who have sales amount more than 1000USD");
 	System.out.println(listMoreThan1000(marketings));
 	}
