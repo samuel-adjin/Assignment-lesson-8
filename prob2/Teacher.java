@@ -24,4 +24,12 @@ public final class Teacher implements EmployeeData{
 		return salary + bonus;
 	}
 
+	@Override
+	public String toString() {
+		return "Teacher{" +
+				"bonus=" + bonus +
+				", name='" + name + '\'' +
+				", salary=" + salary +
+				'}';
+	}
 }

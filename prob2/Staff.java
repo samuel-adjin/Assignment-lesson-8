@@ -20,6 +20,15 @@ public final class Staff implements EmployeeData{
 	}
 
 	@Override
+	public String toString() {
+		return "Staff{" +
+				"name='" + name + '\'' +
+				", salary=" + salary +
+				", numDependants=" + numDependants +
+				'}';
+	}
+
+	@Override
 	public double getSalary() {
 		return salary;
 	}
