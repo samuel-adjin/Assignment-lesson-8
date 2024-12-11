@@ -24,7 +24,7 @@ public class Main {
 		//Implementation steps
 		//Step 1: implement the combine method, to combine the two lists
 		List<EmployeeData> combined = combine(staff, teachers);
-		System.out.println(combined);
+//		System.out.println(combined);
 		//Step 2: pass the combined list to computeSumOfSalaries
 		double salarySum = Statistics.computeSumOfSalaries(combined);
 		System.out.println(salarySum);
@@ -35,13 +35,8 @@ public class Main {
 	public static List<EmployeeData> combine(List<Staff> staff, List<Teacher> teachers) {
 		int arrayListSize = staff.size() + teachers.size();
 		List<EmployeeData> employees = new ArrayList<>(arrayListSize);
-		for (int i = 0; i < arrayListSize; i++) {
-			if(i < staff.size()) {
-				employees.add(staff.get(i));
-			}else{
-				employees.add(teachers.get(i-teachers.size()-1));
-			}
-		}
+		employees.addAll(staff);
+		employees.addAll(teachers);
 		return employees;
 	}
 
