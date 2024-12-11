@@ -16,7 +16,6 @@ public class Marketing implements Comparable <Marketing> {
 	public boolean equals(Object obj) {
 		if(obj == null) return false;
 		if(getClass() != obj.getClass()) return false;
-		Marketing m = (Marketing) obj;
 		return salesamount == ((Marketing) obj).salesamount &&
 				employeename.equals(((Marketing) obj).getEmployeename()) &&
 				productname.equals(((Marketing) obj).getProductname());
