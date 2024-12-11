@@ -81,7 +81,7 @@ public class DoublyLinkedList {
             }
         }
         sb.append("]");
-        System.out.println(sb);
+        System.out.println("LinkedList printed in a reverse order: "+sb);
         // Implement
     }
 
@@ -118,12 +118,12 @@ public class DoublyLinkedList {
         list.addLast("Bob");
         list.addLast("Harry");
         list.addLast("Steve");
-        System.out.println(list);
+        System.out.println("Items in LinkedList printed: " + list);
         list.printReverse();
         list.remove("Harry");
-        System.out.println(list);
+        System.out.println("Items in LinkedList printed after removing Harry:"+ list);
         list.removeFirst();
-        System.out.println(list);
+        System.out.println("Items in LinkedList printed after removing the first Item:"+ list);
         // Call all your implemented Methods
     }
 }
