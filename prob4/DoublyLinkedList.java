@@ -3,59 +3,53 @@ package prob4;
 public class DoublyLinkedList {
 
     Node header;
-    DoublyLinkedList(){
+
+    DoublyLinkedList() {
         header = new Node(null);
     }
+
     //1. adds to the end of the list
-    public void addLast(String item){
+    public void addLast(String item) {
         //implement
         Node n = new Node(item);
         Node last = header;
-        while(last.next != null) {
+        while (last.next != null) {
             last = last.next;
         }
         last.next = n;
         n.previous = last;
 
     }
+
     // 2. Remove by passing object
-    public boolean remove(String item){
-        //Implement
-        if(item == null) {
-            return false;
-        }
-
-        Node currentNode = header.next;
-        if(currentNode == null) {
-            return false;
-        }
-        while(currentNode != null) {
-            if(item.equals(currentNode.value)){
-                if(currentNode.previous != null) {
-                    currentNode.previous.next = currentNode.next;
-                }else{
-                    header.next = currentNode.next;
+    public boolean remove(String item) {
+        if (item == null) return false;
+        if (header.next == null) return false;
+        else {
+            Node current = header.next;
+            while (current != null) {
+                if (current.value.equals(item)) {
+                    if (current.next != null) {
+                        current.next.previous = current.previous;
+                    }
+                    current.previous.next = current.next;
+                    return true;
                 }
-
-                if(currentNode.next != null) {
-                    currentNode.next.previous = currentNode.previous;
-                }
-                return true;
+                current = current.next;
             }
-            currentNode = currentNode.next;
+            return false;
         }
-        return false;
     }
 
     // 3. Remove the First Node
     public boolean removeFirst() {
         // Implement
         Node firstNode = header.next;
-        if(firstNode == null) {
+        if (firstNode == null) {
             return false;
         }
         header.next = firstNode.next;
-        if(header.next != null) {
+        if (header.next != null) {
             header.next.previous = header;
         }
         return true;
@@ -65,23 +59,23 @@ public class DoublyLinkedList {
     // 4. Prints the list from last to first
     public void printReverse() {
         Node currentNode = header.next;
-        if(currentNode == null) {
+        if (currentNode == null) {
             return;
         }
-        while(currentNode.next != null) {
+        while (currentNode.next != null) {
             currentNode = currentNode.next;
         }
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        while( currentNode != header ) {
+        while (currentNode != header) {
             sb.append(currentNode.value);
             currentNode = currentNode.previous;
-            if(currentNode.previous != null) {
+            if (currentNode.previous != null) {
                 sb.append(",");
             }
         }
         sb.append("]");
-        System.out.println("LinkedList printed in a reverse order: "+sb);
+        System.out.println("LinkedList printed in a reverse order: " + sb);
         // Implement
     }
 
@@ -93,9 +87,10 @@ public class DoublyLinkedList {
         return sb.toString();
 
     }
+
     private void toString(StringBuilder sb, Node n) {
-        if(n==null) return;
-        if(n.value != null) sb.append(" " + n.value);
+        if (n == null) return;
+        if (n.value != null) sb.append(" " + n.value);
         toString(sb, n.next);
     }
 
@@ -113,7 +108,7 @@ public class DoublyLinkedList {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         DoublyLinkedList list = new DoublyLinkedList();
         list.addLast("Bob");
         list.addLast("Harry");
@@ -121,9 +116,9 @@ public class DoublyLinkedList {
         System.out.println("Items in LinkedList printed: " + list);
         list.printReverse();
         list.remove("Harry");
-        System.out.println("Items in LinkedList printed after removing Harry:"+ list);
+        System.out.println("Items in LinkedList printed after removing Harry:" + list);
         list.removeFirst();
-        System.out.println("Items in LinkedList printed after removing the first Item:"+ list);
+        System.out.println("Items in LinkedList printed after removing the first Item:" + list);
         // Call all your implemented Methods
     }
 }
